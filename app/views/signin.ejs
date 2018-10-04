@@ -1,0 +1,22 @@
+<%- include('components/header.ejs') %>
+    <div class="container">
+      <div class="row">
+          <div class="col-md-5">
+              <form action="/user/signin" method="POST">
+                <div class="form-group">
+                  <label for="signinName">Username</label>
+                  <input type="text" id="signinName" class="form-control" name="user[name]">
+                </div>
+                <div class="form-group">
+                  <label for="signinPassword">Password</label>
+                  <input type="password" id="signinPassword" class="form-control" name="user[password]">
+                </div>
+              <div class="modal-footer">
+                <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+                <button class="btn btn-success" type="submit">Sign in</button>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+<%- include('components/footer.ejs') %>

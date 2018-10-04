@@ -1,0 +1,19 @@
+<%- include('components/header.ejs') %>
+    <div class="container">
+        <div class="row">
+            <form action="/admin/category/new" method="POST" class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputCategory" class="col-sm-2 control-label">Category</label>
+                    <div class="col-sm-10">
+                         <input type="text" id="inputCategory" name="category[name]" value="<%= category.name %>" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-default" type="submit">Submit</button>
+                  </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<%- include('components/footer.ejs') %>

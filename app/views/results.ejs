@@ -1,0 +1,39 @@
+<%- include('components/header.ejs') %>
+    <div class="container">
+        <div class="row">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3><%= keyword %></h3>
+                </div>
+                <div class="panel-body">
+                  <% if(movies && movies.length > 0){ %>
+                    <% movies.forEach(function (item){ %>
+                      <div class="col-md-2">
+                          <div class="thumbnail">
+                              <a href="/movie/<%= item._id %>">
+                                  <img src="<%= item.poster %>" alt="<%= item.title %>">
+                              </a>
+                              <div class="caption">
+                                  <h3><%= item.title %></h3>
+                                  <p><a href="/movie/<%= item._id %>"  role="button" class="btn btn-primary">Watch Preview</a></p>
+                              </div>
+                          </div>
+                      </div>
+                    <% }) %>
+                  <% } %>
+                </div>
+              </div>
+              <ul class="pagination">
+                <% for(var i = 0; i < totalPage; i++){ %>
+                  <% if(currentPage === (i + 1)){ %>
+                    <li class="active"><span><%= currentPage %></span></li>
+                  <% } else { %>
+                    <li>
+                      <a href="/result?<%= query %>&p=<%= i %>"><%= i+1 %></a>
+                    </li>
+                  <% } %>
+                <% } %>
+              </ul>
+        </div>
+    </div>
+<%- include('components/footer.ejs') %>

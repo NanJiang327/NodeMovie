@@ -1,0 +1,39 @@
+<%- include('components/header.ejs') %>
+    <div class="container">
+        <div class="row">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Moive name</th>
+                        <th>Director</th>
+                        <th>Country</th>
+                        <th>Year</th>
+                        <th>Add time</th>
+                        <th>PV</th>
+                        <th>Detail</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tbody>
+                        <% movies.forEach(function (item){ %>
+                           <tr class="item-id-<%= item._id %>">
+                               <td><%= item.title %></td>
+                               <td><%= item.director %></td>
+                               <td><%= item.country %></td>
+                               <td><%= item.year %></td>
+                               <td><%= moment(item.meta.updateAt).format('MM/DD/YYYY') %></td>
+                               <td><%= item.pv %></td>
+                               <td><a href="/movie/<%= item._id %>" target="_blank">Detail</a></td>
+                               <td><a href="../movie/update/<%= item._id %>" target="_blank">Update</a></td>
+                               <td>
+                                   <button class="btn btn-danger del" type="button" data-id="<%= item._id %>">Delete</button>
+                                </td>
+                           </tr>
+                        <% }) %>
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <script src="/js/admin.js"></script>
+<%- include('components/footer.ejs') %>

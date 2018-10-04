@@ -1,0 +1,78 @@
+<%- include('components/header.ejs') %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <div itemprop="video" itemscope itemtype="http://schema.org/VideoObject"><iframe src="<%= movie.flash %>" width="650" height="400" frameBorder="0" seamless="seamless" allowFullScreen></iframe></div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3>Comments</h3>
+                  </div>
+                  <div class="panel-body">
+                    <ul class="media-list">
+                      <% comments.forEach(function (item){ %>
+                        <li class="media">
+                          <div class="pull-left">
+                            <a class="comment" href="#comments" data-cid="<%= item._id %>" data-tid="<%= item.from._id %>">
+                              <img src="/img/img1.jpg" class="img-circle" style="width: 35px; height: 35px;" alt="">
+                            </a>
+                          </div>
+                          <div class="media-body">
+                            <h4 class="media-heading"><%= item.from.name %></h4>
+                            <p><%= item.content %></p>
+                            <% if(item.reply && item.reply.length > 0) { %>
+                              <% item.reply.forEach(function (reply){ %>
+                                <div class="media">
+                                  <div class="pull-left">
+                                      <a class="comment" href="#comments" data-cid="<%= item._id %>" data-tid="<%= reply.from._id %>">
+                                        <img src="/img/img1.jpg" class="img-circle" style="width: 35px; height: 35px;" alt="">
+                                      </a>
+                                  </div>
+                                  <div class="media-body">
+                                    <h4 class="media-heading"><%= reply.from.name %> <span class="text-info">to</span> <%= reply.to.name %></h4>
+                                    <p><%= reply.content %></p>
+                                  </div>
+                                </div>
+                              <% }) %>
+                            <% } %>
+                          </div>
+                        </li>
+                        <hr>
+                      <% }) %>
+                    </ul>
+                    <% if(user) { %>
+                      <div id="comments">
+                          <form action="/user/comment" method="POST" id="commentForm">
+                            <input type="hidden" name="comment[movie]" value="<%= movie.id %>">
+                            <% if(user) { %>
+                              <input type="hidden" name="comment[from]" value="<%= user._id %>">
+                            <% } %>
+                            <div class="form-group">
+                              <textarea id="" cols="30" rows="3" name="comment[content]" class="form-control"></textarea>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Post</button>
+                          </form>
+                      </div>
+                    <% } else { %>
+                      <a href="#" data-toggle="modal" data-target="#signinModal" class="navbar-link">Login in to comment</a>
+                    <% } %>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <dl class="dl-horizontal">
+                    <dt>Movie name</dt>
+                    <dd><%= movie.title %></dd>
+                    <dt>Director</dt>
+                    <dd><%= movie.director %></dd>
+                    <dt>Country</dt>
+                    <dd><%= movie.country %></dd>
+                    <dt>Year</dt>
+                    <dd><%= movie.year %></dd>
+                    <dt>Description</dt>
+                    <dd><%= movie.summary %></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <script src="/js/detail.js"></script>
+<%- include('components/footer.ejs') %>

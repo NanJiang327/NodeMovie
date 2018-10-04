@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+  <div class="row" id="header">
+    <div class="page-header clearfix">
+      <h1><%= title %></h1>
+      <div class="col-md-4">
+        <small>Moive</small>
+      </div>
+      <div class="col-md-8">
+        <form action="/result" method="GET">
+          <div class="input-group col-sm-4 pull-right">
+            <input type="text" name="q" class="form-control">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">Search</button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand">Moive</a>
+    </div>
+    <p class="navbar-text navbar-right">
+      <% if (user) { %>
+        <span>Welcome back, <%= user.name %>&nbsp;&nbsp;</span>
+        <a href="/logout">Log out</a>
+      <% } else { %>
+        <a href="#" class="navbar-link" data-toggle="modal" data-target="#signupModal">Sign up</a>
+        <span>&nbsp;&nbsp;</span>
+        <a href="#" class="navbar-link" data-toggle="modal" data-target="#signinModal">Sign in</a>
+      <% } %>
+    </p>
+  </div>
+</div>
+<div id="signupModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="/user/signup" method="POST">
+        <div class="modal-header">SIGN UP</div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="signupName">Username</label>
+            <input type="text" id="signupName" class="form-control" name="user[name]">
+            <label for="signupPassword">Password</label>
+            <input type="password" id="signupPassword" class="form-control" name="user[password]">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+          <button class="btn btn-success" type="submit">Sign up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="signinModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form action="/user/signin" method="POST">
+          <div class="modal-header">SIGN IN</div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="signinName">Username</label>
+              <input type="text" id="signinName" class="form-control" name="user[name]">
+              <label for="signinPassword">Password</label>
+              <input type="password" id="signinPassword" class="form-control" name="user[password]">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+            <button class="btn btn-success" type="submit">Sign in</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+

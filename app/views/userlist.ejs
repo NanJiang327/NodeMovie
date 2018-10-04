@@ -1,0 +1,30 @@
+<%- include('components/header.ejs') %>
+    <div class="container">
+        <div class="row">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Time</th>
+                        <th>Detail</th>
+                        <th>Update</th>
+                        <th>More</th>
+                    </tr>
+                    <tbody>
+                        <% users.forEach(function (item){ %>
+                           <tr class="item-id-<%= item._id %>">
+                               <td><%= item.name %></td>
+                               <td><%= moment(item.meta.updateAt).format('MM/DD/YYYY') %></td>
+                               <td><a href="/" target="_blank">Detail</a></td>
+                               <td><a href="/" target="_blank">Update</a></td>
+                               <td>
+                                   <button class="btn btn-danger del" type="button" data-id="<%= item._id %>">Delete</button>
+                                </td>
+                           </tr>
+                        <% }) %>
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+    </div>
+<%- include('components/footer.ejs') %>
